@@ -28,6 +28,12 @@ class PjaxMiddleware {
                 // Filter to title (in order to update the browser title bar)
                 $response_title = $crawler->filter('head > title');
 
+                // Filter to bodyClass
+                $response_body_class = $crawler->filter('body')->extract(array('class'));
+
+                // Set new body class for the response
+                $response->header('X-PJAX-BODY-CLASS', $response_body_class);
+
                 // Filter to given container
                 $response_container = $crawler->filter($request->header('X-PJAX-CONTAINER'));
 
